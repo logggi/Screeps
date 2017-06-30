@@ -5,10 +5,10 @@ var roleRepair = require('role.repair
 
 var roleSpawnCreeps = require('role.spawnCreeps');
 var roleCleanup = require('role.cleanup');
-////var ccu = require('calcCpuUsage');
+//var ccu = require('calcCpuUsage');
 
 module.exports.loop = function() {
-    ////ccu.run('start');
+    //ccu.run('start');
 	
     roleSpawnCreeps.run();
     roleCleanup.run();
@@ -28,5 +28,5 @@ module.exports.loop = function() {
         }
     }
     
-    ////ccu.run('stop');
+    //ccu.run('stop');
 }
