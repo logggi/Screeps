@@ -24,13 +24,14 @@ var roleRepair = {
         } else {
 			var targets = undefined;
             if(creep.memory.repairing) {
-				var target = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, 3, { filter: obj => obj.hits < obj.hitsMax });
-			} else {
-				var targets = spawn1.room.find(FIND_MY_STRUCTURES, { filter: obj => obj.hits < obj.hitsMax });
-				targets.sort((a,b) => a.hits - b.hits);
-				target = targets[0];
+				targets = creep.pos.findInRange(FIND_STRUCTURES, 3, { filter: obj => (obj.hits+1) < obj.hitsMax });
+            } else {
+				targets = spawn1.room.find(FIND_STRUCTURES, { filter: obj => obj.hits < obj.hitsMax });
 			}
+			targets.sort((a,b) => a.hits - b.hits);
+			target = targets[0];
             if(target != undefined) {
+                console.log(target)
                 if(creep.repair(target) == ERR_NOT_IN_RANGE) {
                     pathing.run(creep, target, 5);
 					creep.memory.repairing = true;
