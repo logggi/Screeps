@@ -6,8 +6,9 @@
  * var mod = require('role.upgrader');
  * mod.thing == 'a thing'; // true
  */
+var pathing = require('pathing');
  
- var roleUpgrader = require('role.upgrader');
+var roleUpgrader = require('role.upgrader');
  
 var roleBuilder = {
     run: function(nam) {

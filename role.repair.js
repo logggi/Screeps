@@ -1,3 +1,5 @@
+var pathing = require('pathing');
+
 var roleBuilder = require('role.builder');
 var roleUpgrader = require('role.upgrader');
 
