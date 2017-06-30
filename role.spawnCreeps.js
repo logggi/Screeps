@@ -25,13 +25,13 @@ var roleSpawnCreeps = {
     
         if(Game.spawns['Spawn1'].energy == 300) {
             if(tHarvesters < mHarvesters) {
-                Game.spawns['Spawn1'].createCreep( [WORK,WORK,MOVE,CARRY], undefined, { role: 'harvesters', working: false});
+                Game.spawns['Spawn1'].createCreep( [WORK,WORK,WORK,WORK,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY], undefined, { role: 'harvesters', working: false});
             } else if(tUpgraders < mUpgraders) {
-                Game.spawns['Spawn1'].createCreep( [WORK,WORK,MOVE,CARRY], undefined, { role: 'upgraders', working: false});
+                Game.spawns['Spawn1'].createCreep( [WORK,WORK,WORK,WORK,WORK,MOVE,CARRY,CARRY,CARRY], undefined, { role: 'upgraders', working: false});
             } else if(tBuilders < mBuilders) {
-                    Game.spawns['Spawn1'].createCreep( [WORK,MOVE,CARRY,CARRY], undefined, { role: 'builders', working: false});
+                Game.spawns['Spawn1'].createCreep( [WORK,WORK,WORK,WORK,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY], undefined, { role: 'builders', working: false});
             } else if(tRepairers < mRepairers) {
-                    Game.spawns['Spawn1'].createCreep( [WORK,MOVE,MOVE,CARRY], undefined, { role: 'repairers', working: false});
+                Game.spawns['Spawn1'].createCreep( [WORK,WORK,WORK,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], undefined, { role: 'repairers', working: false});
             }
         }
     }
