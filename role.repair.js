@@ -24,7 +24,7 @@ var roleRepair = {
         } else {
 			var targets = undefined;
             if(creep.memory.repairing) {
-				targets = creep.pos.findInRange(FIND_STRUCTURES, 3, { filter: obj => (obj.hits+1) < obj.hitsMax });
+				targets = creep.pos.findInRange(FIND_STRUCTURES, 3, { filter: obj => (obj.hits) < obj.hitsMax });
             } else {
 				targets = spawn1.room.find(FIND_STRUCTURES, { filter: obj => obj.hits < obj.hitsMax });
 			}
