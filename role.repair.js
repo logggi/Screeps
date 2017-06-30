@@ -24,14 +24,15 @@ var roleRepair = {
         } else {
 			var targets = undefined;
             if(creep.memory.repairing) {
-				var targets = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, 3, { filter: obj => obj.hits < obj.hitsMax });
+				var target = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, 3, { filter: obj => obj.hits < obj.hitsMax });
 			} else {
 				var targets = spawn1.room.find(FIND_MY_STRUCTURES, { filter: obj => obj.hits < obj.hitsMax });
+				targets.sort((a,b) => a.hits - b.hits);
+				target = targets[0];
 			}
-			targets.sort((a,b) => a.hits - b.hits);
-            if(targets.length > 0) {
-                if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-                    pathing.run(creep, targets[0], 5);
+            if(target != undefined) {
+                if(creep.repair(target[0]) == ERR_NOT_IN_RANGE) {
+                    pathing.run(creep, target[0], 5);
 					creep.memory.repairing = true;
                 }
             } else {
