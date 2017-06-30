@@ -2,7 +2,10 @@ module.exports = {
     init: function() {
 	Object.defineProperty(Room.prototype, 'sources', {
 	    get: function() {
-	        return this.find(FIND_SOURCES);
+	        if(!this._sources) {
+    	        this._sources = this.find(FIND_SOURCES);
+    	        return this._sources;
+	        }
 	    },
 	    enumerable: false,
 	    configurable: true

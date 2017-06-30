@@ -5,10 +5,20 @@ var roleRepair = require('role.repair');
 
 var roleSpawnCreeps = require('role.spawnCreeps');
 var roleCleanup = require('role.cleanup');
-var globalFunctions = require('globalFunctions');
 
+/*
+var globalFunctions = require('globalFunctions');
 globalFunctions.init();
-//var ccu = require('calcCpuUsage');
+
+var ccu = require('calcCpuUsage');
+Game.spawns['Spawn1'].room.souces
+ccu.run('start');
+Game.spawns['Spawn1'].room.find(FIND_SOURCES);
+ccu.run('stop');
+ccu.run('start');
+Game.spawns['Spawn1'].room.souces
+ccu.run('stop');
+*/
 
 module.exports.loop = function() {
     //ccu.run('start');
