@@ -18,12 +18,12 @@ var roleHarvester = {
         if(sources) {
             if(!creep.memory.working) {
                 if(creep.harvest(sources) == ERR_NOT_IN_RANGE) {
-					pathing(creep, sources, 30);
+					pathing.run(creep, sources, 30);
                 }    
             } else {
                 if(spawn1.energy < spawn1.energyCapacity) {
                     if(creep.transfer(spawn1, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        pathing(creep, spawn1, 30);
+                        pathing.run(creep, spawn1, 30);
 					}
                 } else {
                     roleBuilder.run(nam)

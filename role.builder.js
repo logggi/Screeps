@@ -26,11 +26,11 @@ var roleBuilder = {
             }
             if(!creep.memory.working) {
                 if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                    pathing(creep, source, 20);
+                    pathing.run(creep, source, 20);
                 }
             } else {
                 if(creep.build(target) == ERR_NOT_IN_RANGE) {
-                    pathing(creep, target, 20);
+                    pathing.run(creep, target, 20);
                 }
             }
         } else {

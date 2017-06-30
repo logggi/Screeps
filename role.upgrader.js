@@ -6,7 +6,8 @@
  * var mod = require('role.upgrader');
  * mod.thing == 'a thing'; // true
  */
- var pathing = require('pathing');
+
+var pathing = require('pathing');
  
 var roleUpgrader = {
     run: function(nam) {
@@ -25,11 +26,11 @@ var roleUpgrader = {
         
         if(!creep.memory.working) {
             if(creep.harvest(resource) == ERR_NOT_IN_RANGE) {
-                pathing(creep, resource, 5);
+                pathing.run(creep, resource, 5);
             }
         } else {
             if(creep.upgradeController(control) == ERR_NOT_IN_RANGE) {
-                pathing(creep, control, 5);
+                pathing.run(creep, control, 5);
             }
         }
     }
