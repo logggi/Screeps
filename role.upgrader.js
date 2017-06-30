@@ -23,11 +23,11 @@ var roleUpgrader = {
         
         if(!creep.memory.working) {
             if(creep.harvest(resource) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(resource);
+                pathing(creep, resource, 5);
             }
         } else {
             if(creep.upgradeController(control) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(control);
+                pathing(creep, control, 5);
             }
         }
     }

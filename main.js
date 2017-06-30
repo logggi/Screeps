@@ -1,18 +1,19 @@
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
-var roleRepair = require('role.repair');
+var roleRepair = require('role.repair
+
 var roleSpawnCreeps = require('role.spawnCreeps');
 var roleCleanup = require('role.cleanup');
-var ccu = require('calcCpuUsage');
+//var ccu = require('calcCpuUsage');
 
 module.exports.loop = function() {
-    ccu.run('start');
-    
+    //ccu.run('start');
+	
     roleSpawnCreeps.run();
-
+    roleCleanup.run();
+		
     for(var name in Game.creeps) {
-        roleCleanup.run(name)
         if(Game.creeps[name].memory.role == 'harvesters') {
             roleHarvester.run(name);
         }
@@ -27,5 +28,5 @@ module.exports.loop = function() {
         }
     }
     
-    ccu.run('stop');
+    //ccu.run('stop');
 }

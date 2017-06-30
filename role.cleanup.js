@@ -7,11 +7,13 @@
  * mod.thing == 'a thing'; // true
  */
 var roleCleanup = {
-    run: function(name) {
-        if(!Game.creeps[name]) {
-            delete Memory.creeps[name];
-            console.log("creep deleted from memory: " + name)
-        }
+    run: function() {
+		for(var name in Memory.creeps) {
+			if(!Game.creeps[name]) {
+				delete Memory.creeps[name];
+				console.log("creep deleted from memory: " + name)
+			}
+		}
     }
 }
 module.exports = roleCleanup;

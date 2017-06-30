@@ -1,5 +1,6 @@
 var roleBuilder = require('role.builder');
 var roleUpgrader = require('role.upgrader');
+var pathing = require('pathing');
 
 var roleHarvester = {
     run: function(nam) {
@@ -17,13 +18,13 @@ var roleHarvester = {
         if(sources) {
             if(!creep.memory.working) {
                 if(creep.harvest(sources) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(sources);
+					pathing(creep, sources, 30);
                 }    
             } else {
                 if(spawn1.energy < spawn1.energyCapacity) {
                     if(creep.transfer(spawn1, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(spawn1)
-                    }
+                        pathing(creep, spawn1, 30);
+					}
                 } else {
                     roleBuilder.run(nam)
                 }

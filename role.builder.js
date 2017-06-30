@@ -16,8 +16,8 @@ var roleBuilder = {
         var target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
          
         if(target) {
-              var source = target.pos.findClosestByRange(FIND_SOURCES);
-              if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
+			var source = target.pos.findClosestByRange(FIND_SOURCES);
+			if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
                     creep.memory.working = true;
             }
             if(creep.memory.working && creep.carry.energy == 0) {
@@ -25,11 +25,11 @@ var roleBuilder = {
             }
             if(!creep.memory.working) {
                 if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(source);
+                    pathing(creep, source, 20);
                 }
             } else {
                 if(creep.build(target) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target);
+                    pathing(creep, target, 20);
                 }
             }
         } else {

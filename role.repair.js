@@ -12,21 +12,30 @@ var roleRepair = {
         }
         if(creep.memory.working && creep.carry.energy == 0) {
             creep.memory.working = false;
+			creep.memory.repairing = false;
         }
         
         if(!creep.memory.working) {
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(source);
+                    pathing(creep, source, 5);
             }    
         } else {
-            var targets = spawn1.room.find(FIND_STRUCTURES, { filter: obj => obj.hits < obj.hitsMax });
-            targets.sort((a,b) => a.hits - b.hits);
+			var targets = undefined;
+            if(creep.memory.repairing) {
+				var targets = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, 3, { filter: obj => obj.hits < obj.hitsMax });
+			} else {
+				var targets = spawn1.room.find(FIND_MY_STRUCTURES, { filter: obj => obj.hits < obj.hitsMax });
+			}
+			targets.sort((a,b) => a.hits - b.hits);
             if(targets.length > 0) {
                 if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0]);
+                    pathing(creep, targets[0], 5);
+					creep.memory.repairing = true;
                 }
             } else {
-                console.log(targets.length)
+				if(creep.memory.repairing) {
+					creep.memory.repairing = false;
+				}
                 roleBuilder.run(nam)
             }
         }
