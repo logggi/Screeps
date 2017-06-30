@@ -14,10 +14,10 @@ var roleBuilder = {
 
         var creep = Game.creeps[nam];
         var target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
-        var source = target.pos.findClosestByRange(FIND_SOURCES);
-        
+         
         if(target) {
-            if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
+              var source = target.pos.findClosestByRange(FIND_SOURCES);
+              if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
                     creep.memory.working = true;
             }
             if(creep.memory.working && creep.carry.energy == 0) {
