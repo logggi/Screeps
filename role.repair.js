@@ -31,7 +31,6 @@ var roleRepair = {
 			targets.sort((a,b) => a.hits - b.hits);
 			target = targets[0];
             if(target != undefined) {
-                console.log(target)
                 if(creep.repair(target) == ERR_NOT_IN_RANGE) {
                     pathing.run(creep, target, 5);
 					creep.memory.repairing = true;
