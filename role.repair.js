@@ -31,8 +31,8 @@ var roleRepair = {
 				target = targets[0];
 			}
             if(target != undefined) {
-                if(creep.repair(target[0]) == ERR_NOT_IN_RANGE) {
-                    pathing.run(creep, target[0], 5);
+                if(creep.repair(target) == ERR_NOT_IN_RANGE) {
+                    pathing.run(creep, target, 5);
 					creep.memory.repairing = true;
                 }
             } else {
