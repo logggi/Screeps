@@ -1,6 +1,18 @@
 module.exports = {
     init: function() {
     
+    //Get all towers
+    Room.prototype.towers = function() {
+        if(!this._towers) {
+            if(!this.memory.towerIds) {
+                this.memory.towerIds = this.find(FIND_STRUCTURES, {filter: obj => obj.structureType == STRUCTURE_TOWER}).map(tower => tower.id)
+            }
+            this._towers = this.memory.towerIds.map(id => Game.getObjectById(id));
+        }
+        return this._towers;
+    }
+    
+    //Get all sources
     Room.prototype.sources = function() {
         if(!this._sources) {
             if(!this.memory.sourceIds) {
@@ -11,6 +23,8 @@ module.exports = {
         return this._sources;
     }
     
+    
+    //Get all spawning structures
     if(!Memory.spawnStructures) {
         Memory.spawnStructures = {};
         Memory.spawnStructures.length = 0;

@@ -21,13 +21,16 @@ var roleHarvester = {
         }
         if(sources) {
             if(!creep.memory.working) {
+                if(sources.energy == 0) {
+                    creep.memory.working = true;
+                }
                 if(creep.harvest(sources) == ERR_NOT_IN_RANGE) {
-					pathing.run(creep, sources, 30);
+					pathing.run(creep, sources, 20);
                 }    
             } else {
                 if(target.energy < target.energyCapacity) {
                     if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        pathing.run(creep, target, 30);
+                        pathing.run(creep, target, 20);
 					}
                 } else {
                     roleBuilder.run(nam)

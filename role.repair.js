@@ -22,24 +22,9 @@ var roleRepair = {
                     pathing.run(creep, source, 5);
             }    
         } else {
-			var targets = undefined;
-            if(creep.memory.repairing) {
-				targets = creep.pos.findInRange(FIND_STRUCTURES, 3, { filter: obj => (obj.hits) < obj.hitsMax });
-            } else {
-				targets = spawn1.room.find(FIND_STRUCTURES, { filter: obj => obj.hits < obj.hitsMax });
-			}
-			targets.sort((a,b) => a.hits - b.hits);
-			target = targets[0];
-            if(target != undefined) {
-                if(creep.repair(target) == ERR_NOT_IN_RANGE) {
-                    pathing.run(creep, target, 5);
-					creep.memory.repairing = true;
-                }
-            } else {
-				if(creep.memory.repairing) {
-					creep.memory.repairing = false;
-				}
-                roleBuilder.run(nam)
+			target = creep.room.towers()[0];
+            if(creep.transfer(target) == ERR_NOT_IN_RANGE) {
+                pathing.run(creep, target, 5);
             }
         }
     }

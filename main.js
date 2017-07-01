@@ -2,6 +2,7 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepair = require('role.repair');
+var roleTower = require('role.tower');
 
 var roleSpawnCreeps = require('role.spawnCreeps');
 var roleCleanup = require('role.cleanup');
@@ -26,6 +27,8 @@ module.exports.loop = function() {
 
     roleSpawnCreeps.run();
     roleCleanup.run();
+    
+	roleTower();
 	
     for(var name in Game.creeps) {
         if(Game.creeps[name].memory.role == 'harvesters') {
@@ -41,8 +44,7 @@ module.exports.loop = function() {
             roleRepair.run(name);
         }
         if(name == 'Joshua') {
-            pathing.run(Game.creeps[name],newRoom,50);
-            console.log(Game.creeps[name].memory._move.path);
+            Game.creeps['Joshua'].reserveController(Game.getObjectById('58dbc35c8283ff5308a3d6dc'))
         }
     }
     

@@ -31,6 +31,9 @@ var roleBuilder = {
                 if(creep.build(target) == ERR_NOT_IN_RANGE) {
                     pathing.run(creep, target, 5);
                 }
+                if(!target) {
+                    Memory.spawnStructures.update = true;
+                }
             }
         } else {
             roleUpgrader.run(nam)
