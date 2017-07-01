@@ -6,7 +6,7 @@ module.exports = {
 	        if(!Memory.sources) {
     	        var this._sources = this.find(FIND_SOURCES);
 for(var i in this._sources) {
-Memory.sources[i.id] = i.
+Memory.sources[i.id] = i.pos;
 }
 	        }
     	    return Memory.sources;
