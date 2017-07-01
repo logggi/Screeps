@@ -5,8 +5,12 @@ var pathing = require('pathing');
 var roleHarvester = {
     run: function(nam) {
         var creep = Game.creeps[nam];
-        var spawn1 = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: obj => obj.energy < obj.energyCapacity});
-        //var sources = creep.pos.findClosestByRange(FIND_SOURCES, {filter: obj => obj.energy > 0});
+        var target = creep.pos.findClosestByRange(creep.room.spawnStructures, {filter: obj => obj.energy < obj.energyCapacity});
+        
+        if(target == undefined) {
+            target = Game.spawns['Spawn1'];
+        }
+        
         var sources = Game.getObjectById('58dbc35f8283ff5308a3d71f');
         
         if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
@@ -21,9 +25,9 @@ var roleHarvester = {
 					pathing.run(creep, sources, 30);
                 }    
             } else {
-                if(spawn1.energy < spawn1.energyCapacity) {
-                    if(creep.transfer(spawn1, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        pathing.run(creep, spawn1, 30);
+                if(target.energy < target.energyCapacity) {
+                    if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        pathing.run(creep, target, 30);
 					}
                 } else {
                     roleBuilder.run(nam)

@@ -6,10 +6,11 @@ var roleRepair = require('role.repair');
 var roleSpawnCreeps = require('role.spawnCreeps');
 var roleCleanup = require('role.cleanup');
 
-/*
+
 var globalFunctions = require('globalFunctions');
 globalFunctions.init();
 
+/*
 var ccu = require('calcCpuUsage');
 Game.spawns['Spawn1'].room.souces
 ccu.run('start');
