@@ -4,7 +4,10 @@ module.exports = {
 	Object.defineProperty(Room.prototype, 'sources', {
 	    get: function() {
 	        if(!Memory.sources) {
-    	        Memory.sources = this.find(FIND_SOURCES);
+    	        var this._sources = this.find(FIND_SOURCES);
+for(var i in this._sources) {
+Memory.sources[i.id] = i.
+}
 	        }
     	    return Memory.sources;
 	    },
