@@ -3,10 +3,10 @@ module.exports = {
         
 	Object.defineProperty(Room.prototype, 'sources', {
 	    get: function() {
-	        if(!this._sources) {
-    	        this._sources = this.find(FIND_SOURCES);
+	        if(!Memory.sources) {
+    	        Memory.sources = this.find(FIND_SOURCES);
 	        }
-    	    return this._sources;
+    	    return Memory.sources;
 	    },
 	    enumerable: false,
 	    configurable: true
