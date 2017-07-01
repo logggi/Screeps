@@ -26,12 +26,14 @@ var roleBuilder = {
             if(!creep.memory.working) {
                 if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                     pathing.run(creep, source, 5);
+                } else {
+                    creep.build(target)
                 }
             } else {
                 if(creep.build(target) == ERR_NOT_IN_RANGE) {
                     pathing.run(creep, target, 5);
                 }
-                if(!target) {
+                if(!Game.constructionSites[target.id]) {
                     Memory.spawnStructures.update = true;
                 }
             }

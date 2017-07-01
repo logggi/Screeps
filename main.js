@@ -21,7 +21,6 @@ ccu.run('start');
 Game.spawns['Spawn1'].room.souces
 ccu.run('stop');
 */
-newRoom = new RoomPosition(13,15,'W79S97');
 module.exports.loop = function() {
     //ccu.run('start');
 

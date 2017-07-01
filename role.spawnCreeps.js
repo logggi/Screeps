@@ -23,7 +23,7 @@ var roleSpawnCreeps = {
         Game.spawns['Spawn1'].room.visual.text("Builders: " + tBuilders + "/" + mBuilders, 16, 14, {color: 'green', align: 'left'})
         Game.spawns['Spawn1'].room.visual.text("Repairers: " + tRepairers + "/" + mRepairers, 16, 12, {color: 'green', align: 'left'})
     
-        if(Game.spawns['Spawn1'].energy == 300) {
+        if(Game.spawns['Spawn1'].room.energyAvailable >= 600) {
             if(tHarvesters < mHarvesters) {
                 Game.spawns['Spawn1'].createCreep( [WORK,WORK,WORK,WORK,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY], undefined, { role: 'harvesters', working: false});
             } else if(tUpgraders < mUpgraders) {
