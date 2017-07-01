@@ -21,6 +21,7 @@ ccu.run('start');
 Game.spawns['Spawn1'].room.souces
 ccu.run('stop');
 */
+
 module.exports.loop = function() {
     //ccu.run('start');
 
@@ -28,7 +29,7 @@ module.exports.loop = function() {
     roleCleanup.run();
     
 	roleTower();
-	
+
     for(var name in Game.creeps) {
         if(Game.creeps[name].memory.role == 'harvesters') {
             roleHarvester.run(name);

@@ -23,7 +23,7 @@ var roleRepair = {
             }    
         } else {
 			target = creep.room.towers()[0];
-            if(creep.transfer(target) == ERR_NOT_IN_RANGE) {
+            if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 pathing.run(creep, target, 5);
             }
         }

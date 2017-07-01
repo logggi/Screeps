@@ -21,9 +21,6 @@ var roleHarvester = {
         }
         if(sources) {
             if(!creep.memory.working) {
-                if(sources.energy == 0) {
-                    creep.memory.working = true;
-                }
                 if(creep.harvest(sources) == ERR_NOT_IN_RANGE) {
 					pathing.run(creep, sources, 20);
                 }    
