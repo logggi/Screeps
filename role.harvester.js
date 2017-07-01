@@ -5,7 +5,7 @@ var pathing = require('pathing');
 var roleHarvester = {
     run: function(nam) {
         var creep = Game.creeps[nam];
-        var spawn1 = Game.spawns['Spawn1'];
+        var spawn1 = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: obj => obj.energy < obj.energyCapacity});
         //var sources = creep.pos.findClosestByRange(FIND_SOURCES, {filter: obj => obj.energy > 0});
         var sources = Game.getObjectById('58dbc35f8283ff5308a3d71f');
         
