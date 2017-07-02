@@ -10,8 +10,8 @@ var roleSpawnCreeps = {
     run: function() {
         const mHarvesters = 3;
         const mUpgraders = 2;
-        const mBuilders = 0;
-        const mRepairers = 2;
+        const mBuilders = 2;
+        const mRepairers = 1;
         const mTransporters = 2;
     
         let tHarvesters = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'harvesters' }}}).length;

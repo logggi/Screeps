@@ -11,10 +11,11 @@ var pathing = require('pathing');
 var roleUpgrader = require('role.upgrader');
  
 var roleBuilder = {
-    run: function(nam) {
+    run: function(name) {
 
-        var creep = Game.creeps[nam];
+        var creep = Game.creeps[name];
         var target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
+        
         if(target) {
 			var source = target.pos.findClosestByRange(creep.room.sources());
 			if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
@@ -24,10 +25,10 @@ var roleBuilder = {
                 creep.memory.working = false;
             }
             if(!creep.memory.working) {
-                if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                    pathing.run(creep, source, 5);
-                } else {
-                    creep.build(target)
+                var container = target.pos.findClosestByRange(target.room.containers(), {filter: obj => obj.store[RESOURCE_ENERGY] > 200});
+                
+                if(creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    pathing.run(creep, container, 5);
                 }
             } else {
                 if(creep.build(target) == ERR_NOT_IN_RANGE) {

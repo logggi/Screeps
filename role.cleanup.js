@@ -10,7 +10,7 @@ var roleCleanup = {
     run: function() {
 		for(var name in Memory.creeps) {
 			if(!Game.creeps[name]) {
-			    if(_.isObject(Memory.creeps[name].source)) {
+			    if(_.isString(Memory.creeps[name].source)) {
                     let source = Game.getObjectById(Memory.creeps[name].source);
                     source.memory.workers--;
 			    }
