@@ -14,7 +14,6 @@ var roleSpawnCreeps = {
         const mRepairers = 2;
         const mTransporters = 2;
     
-        var tUpgraders = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'upgraders' }}}).length;
         let tHarvesters = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'harvesters' }}}).length;
         let tUpgraders = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'upgraders' }}}).length;
         let tBuilders = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'builders' }}}).length;
