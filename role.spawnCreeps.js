@@ -28,9 +28,6 @@ var roleSpawnCreeps = {
         
         let tEnergy = Game.spawns['Spawn1'].room.energyAvailable;
 
-        let sources = Game.spawns['Spawn1'].room.sources().sort((a,b) => a.memory.workers - b.memory.workers);
-        console.log(sources[0].id)
-
         if(Game.spawns['Spawn1'].room.energyAvailable >= 900) {
             if(tHarvesters < mHarvesters)
             {
