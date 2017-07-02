@@ -34,7 +34,7 @@ var roleSpawnCreeps = {
                 let sources = Game.spawns['Spawn1'].room.sources().sort((a,b) => a.memory.workers - b.memory.workers);
                 let container = sources[0].pos.findInRange(FIND_STRUCTURES, 2, {filter: obj => obj.structureType == STRUCTURE_CONTAINER})[0];
                 const newCreep = Game.spawns['Spawn1'].createCreep(
-                                        [WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE,CARRY],
+                                        [WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE,CARRY], //1300
                                         undefined,
                                         { role: 'harvesters', source: sources[0].id, container: container.id, working: false }
                                     );
@@ -62,7 +62,7 @@ var roleSpawnCreeps = {
             else if(tBuilders < mBuilders)
             {
                 Game.spawns['Spawn1'].createCreep(
-                    [WORK,WORK,WORK,WORK,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY],
+                    [WORK,WORK,WORK,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], //1300
                     undefined,
                     { role: 'builders', working: false }
                 );
