@@ -17,7 +17,7 @@ Game.spawns['Spawn1'].room.souces
 ccu.run('start');
 Game.spawns['Spawn1'].room.find(FIND_SOURCES);
 ccu.run('stop');
-ccu.run('start'); lololol
+ccu.run('start');
 Game.spawns['Spawn1'].room.souces
 ccu.run('stop');
 */
@@ -27,7 +27,7 @@ module.exports.loop = function() {
 
     roleSpawnCreeps.run();
     roleCleanup.run();
-    
+    Game.creeps 
 	roleTower();
 
     for(var name in Game.creeps) {
