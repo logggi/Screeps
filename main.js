@@ -17,7 +17,7 @@ Game.spawns['Spawn1'].room.souces
 ccu.run('start');
 Game.spawns['Spawn1'].room.find(FIND_SOURCES);
 ccu.run('stop');
-ccu.run('start');
+ccu.run('start'); lololol
 Game.spawns['Spawn1'].room.souces
 ccu.run('stop');
 */
