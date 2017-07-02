@@ -43,9 +43,6 @@ module.exports.loop = function() {
         if(Game.creeps[name].memory.role == 'repairers') {
             roleRepair.run(name);
         }
-        if(name == 'Joshua') {
-            Game.creeps['Joshua'].reserveController(Game.getObjectById('58dbc35c8283ff5308a3d6dc'))
-        }
     }
     
     //ccu.run('stop');
