@@ -3,6 +3,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepair = require('role.repair');
 var roleTower = require('role.tower');
+var roleTransporter = require('role.transporter');
 
 var roleSpawnCreeps = require('role.spawnCreeps');
 var roleCleanup = require('role.cleanup');
@@ -22,17 +23,21 @@ Game.spawns['Spawn1'].room.souces
 ccu.run('stop');
 */
 
+
 module.exports.loop = function() {
     //ccu.run('start');
 
     roleSpawnCreeps.run();
     roleCleanup.run();
-    Game.creeps 
+
 	roleTower();
 
     for(var name in Game.creeps) {
         if(Game.creeps[name].memory.role == 'harvesters') {
             roleHarvester.run(name);
+        }
+        if(Game.creeps[name].memory.role == 'transporter') {
+            roleTransporter(name);
         }
         if(Game.creeps[name].memory.role == 'upgraders') {
             roleUpgrader.run(name);

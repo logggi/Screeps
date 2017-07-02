@@ -1,6 +1,40 @@
 module.exports = {
     init: function() {
     
+    //Give sources memory
+    Object.defineProperty(Source.prototype, 'memory', {
+       configurable: true,
+       get: function() {
+           if(_.isUndefined(Memory.mySourcesMemory)) {
+               Memory.mySourcesMemory = {};
+           }
+           if(!_.isObject(Memory.mySourcesMemory)) {
+               return undefined;
+           }
+           return Memory.mySourcesMemory[this.id] || {};
+       },
+       set: function(value) {
+           if(_.isUndefined(Memory.mySourcesMemory)) {
+               Memory.mySourcesMemory = {};
+           }
+           if(!_.isObject(Memory.mySourcesMemory)) {
+               throw new Error('Could not set souce memory');
+           }
+           Memory.mySourcesMemory[this.id] = value;
+       }
+    });
+    
+    //Get all containers
+    Room.prototype.containers = function() {
+        if(!this._containers) {
+            if(!this.memory.containerIds) {
+                this.memory.containerIds = this.find(FIND_STRUCTURES, {filter: obj => obj.structureType == STRUCTURE_CONTAINER}).map(obj => obj.id)
+            }
+            this._containers = this.memory.containerIds.map(id => Game.getObjectById(id));
+        }
+        return this._containers;
+    }
+    
     //Get all towers
     Room.prototype.towers = function() {
         if(!this._towers) {
@@ -37,8 +71,8 @@ module.exports = {
 	            Memory.spawnStructures = {};
 	            this.find(FIND_STRUCTURES, {filter: obj => obj.structureType == STRUCTURE_EXTENSION || obj.structureType == STRUCTURE_SPAWN}).forEach(function(obj) {;
 	                Memory.spawnStructures[i++] = {id: obj.id};
-	                Memory.spawnStructures.update = false;
 	                Memory.spawnStructures.length = i;
+	                Memory.spawnStructures.update = false;
 	            });
 	        }
 	        var arr = [];
