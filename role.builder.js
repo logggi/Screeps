@@ -15,9 +15,7 @@ var roleBuilder = {
 
         var creep = Game.creeps[name];
         var target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
-        
         if(target) {
-			var source = target.pos.findClosestByRange(creep.room.sources());
 			if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
                     creep.memory.working = true;
             }
@@ -25,17 +23,21 @@ var roleBuilder = {
                 creep.memory.working = false;
             }
             if(!creep.memory.working) {
-                var container = target.pos.findClosestByRange(target.room.containers(), {filter: obj => obj.store[RESOURCE_ENERGY] > 200});
-                
-                if(creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    pathing.run(creep, container, 5);
+                var source = target.pos.findClosestByRange(target.room.containers(), {filter: obj => obj.store[RESOURCE_ENERGY] > 200});
+                if(!source) {
+                    //source = target.pos.findClosestByRange(creep.room.sources());
+                    source = Game.getObjectById('58dbc6088283ff5308a4182d');
+                    if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                        pathing.run(creep, source, 10);
+                    }
+                } else {
+                    if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        pathing.run(creep, source, 10);
+                    }
                 }
             } else {
                 if(creep.build(target) == ERR_NOT_IN_RANGE) {
-                    pathing.run(creep, target, 5);
-                }
-                if(!Game.constructionSites[target.id]) {
-                    Memory.spawnStructures.update = true;
+                    pathing.run(creep, target, 30);
                 }
             }
         } else {

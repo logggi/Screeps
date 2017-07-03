@@ -12,40 +12,42 @@ var pathing = require('pathing');
 var globalFunctions = require('globalFunctions');
 globalFunctions.init();
 
-/*
-var ccu = require('calcCpuUsage');
-Game.spawns['Spawn1'].room.souces
-ccu.run('start');
-Game.spawns['Spawn1'].room.find(FIND_SOURCES);
-ccu.run('stop');
-ccu.run('start');
-Game.spawns['Spawn1'].room.souces
-ccu.run('stop');
-*/
-
+var updateConstructionSites = true;
 
 module.exports.loop = function() {
     //ccu.run('start');
-
+    
+    if(updateConstructionSites) {
+        Memory.rooms['E97N74'].constructionSites = _.map(Game.constructionSites, obj => obj.id);
+        updateConstructionSites = false;
+    } else {
+        for(let i in Memory.rooms['E97N74'].constructionSites) {
+            if(Game.constructionSites[i] == undefined) {
+                Game.spawns['Spawn1'].room.spawnStructures();
+                updateConstructionSites = true;
+            }
+        }
+    }
+    
     roleSpawnCreeps.run();
     roleCleanup.run();
 
 	roleTower();
 
     for(var name in Game.creeps) {
-        if(Game.creeps[name].memory.role == 'harvesters') {
+        if(Game.creeps[name].memory.role == 'harvester') {
             roleHarvester.run(name);
         }
         if(Game.creeps[name].memory.role == 'transporter') {
             roleTransporter(name);
         }
-        if(Game.creeps[name].memory.role == 'upgraders') {
+        if(Game.creeps[name].memory.role == 'upgrader') {
             roleUpgrader.run(name);
         }
-        if(Game.creeps[name].memory.role == 'builders') {
+        if(Game.creeps[name].memory.role == 'builder') {
             roleBuilder.run(name);
         }
-        if(Game.creeps[name].memory.role == 'repairers') {
+        if(Game.creeps[name].memory.role == 'repairer') {
             roleRepair.run(name);
         }
     }

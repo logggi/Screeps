@@ -8,16 +8,16 @@
  */
 var roleSpawnCreeps = {
     run: function() {
-        const mHarvesters = 3;
+        const mHarvesters = 0;
         const mUpgraders = 2;
-        const mBuilders = 2;
-        const mRepairers = 1;
-        const mTransporters = 2;
+        const mBuilders = 3;
+        const mRepairers = 0;
+        const mTransporters = 3;
     
-        let tHarvesters = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'harvesters' }}}).length;
-        let tUpgraders = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'upgraders' }}}).length;
-        let tBuilders = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'builders' }}}).length;
-        let tRepairers = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'repairers' }}}).length;
+        let tHarvesters = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'harvester' }}}).length;
+        let tUpgraders = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'upgrader' }}}).length;
+        let tBuilders = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'builder' }}}).length;
+        let tRepairers = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'repairer' }}}).length;
         let tTransporters = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: obj => obj.memory.role == 'transporter'}).length;
 
         Game.spawns['Spawn1'].room.visual.text("Harvesters:" + tHarvesters + "/" + mHarvesters, 16, 11, {color: 'green', align: 'left'});
@@ -39,13 +39,13 @@ var roleSpawnCreeps = {
                 const newCreep = Game.spawns['Spawn1'].createCreep(
                                         [WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE,CARRY], //1300
                                         undefined,
-                                        { role: 'harvesters', source: sources[0].id, container: container, working: false }
+                                        { role: 'harvester', source: sources[0].id, container: container, working: false }
                                     );
                 if(_.isString(newCreep)) {
                     sources[0].memory.workers += 1;
                 }
             }
-            if (tTransporters < mTransporters && tEnergy >= 100)
+            if (tTransporters < mTransporters && tEnergy >= 300)
             {
                 let sources = Game.spawns['Spawn1'].room.sources().sort((a,b) => a.memory.workers - b.memory.workers);
                 let container = sources[0].pos.findInRange(FIND_STRUCTURES, 2, {filter: obj => obj.structureType == STRUCTURE_CONTAINER})[0];
@@ -56,20 +56,22 @@ var roleSpawnCreeps = {
                         { role: 'transporter', container: container, working: false }
                     );
             }
-            else if(tUpgraders < mUpgraders)
+            else if(tUpgraders < mUpgraders && tEnergy >= 300)
             {
                 Game.spawns['Spawn1'].createCreep(
-                        [WORK,WORK,WORK,WORK,WORK,MOVE,CARRY,CARRY,CARRY],
+                        //[WORK,WORK,WORK,WORK,WORK,MOVE,CARRY,CARRY,CARRY],
+                        [WORK,MOVE,MOVE,CARRY,CARRY],
                         undefined,
-                        { role: 'upgraders', working: false }
+                        { role: 'upgrader', working: false }
                     );
             }
-            else if(tBuilders < mBuilders)
+            else if(tBuilders < mBuilders && tEnergy >= 300)
             {
                 Game.spawns['Spawn1'].createCreep(
-                    [WORK,WORK,WORK,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], //1300
+                    //[WORK,WORK,WORK,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], //1300
+                    [WORK,WORK,MOVE,CARRY],
                     undefined,
-                    { role: 'builders', working: false }
+                    { role: 'builder', working: false }
                 );
             }
             else if(tRepairers < mRepairers)
@@ -77,7 +79,7 @@ var roleSpawnCreeps = {
                 Game.spawns['Spawn1'].createCreep(
                     [WORK,WORK,WORK,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY],
                     undefined,
-                    { role: 'repairers', working: false }
+                    { role: 'repairer', working: false }
                 );
             }
         }

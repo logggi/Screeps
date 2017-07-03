@@ -12,8 +12,8 @@ module.exports = function(name) {
     let creep = Game.creeps[name];
     let containers = creep.room.containers();
     
-    let target = creep.pos.findClosestByRange(creep.room.spawnStructures, {filter: obj => obj.energy != obj.energyCapacity})
-    let container = target.pos.findClosestByRange(containers, {filter: obj => obj.store[RESOURCE_ENERGY] > 0});
+    let target = creep.pos.findClosestByRange(creep.room.spawnStructures(), {filter: obj => obj.energy != obj.energyCapacity})
+    let container = undefined; //target.pos.findClosestByRange(containers, {filter: obj => obj.store[RESOURCE_ENERGY] > 0});
     //let container = Game.getObjectById('5958b3408df84f4018fd5af1')
     
     if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
@@ -28,11 +28,11 @@ module.exports = function(name) {
             pathing.run(creep, container, 20)
         }
         if (!container) {
-        let source = target.pos.findClosestByRange(target.room.sources());
-        if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-            pathing.run(creep, source, 5)
+            let source = creep.pos.findClosestByRange(creep.room.sources());
+            if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                pathing.run(creep, source, 10)
+            }
         }
-    }
     }
     else
     {
@@ -41,8 +41,9 @@ module.exports = function(name) {
                 pathing.run(creep, target, 20);
             }
         } else {
-            if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                pathing.run(creep, creep.room.controller, 5)
+            target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
+            if(creep.build(target) == ERR_NOT_IN_RANGE) {
+                pathing.run(creep, target, 5)
             }
         }
     }
