@@ -39,7 +39,7 @@ var roleBuilder = {
                 }
             }
         } else {
-            roleUpgrader.run(nam)
+            roleUpgrader.run(name)
         }
     }
 }

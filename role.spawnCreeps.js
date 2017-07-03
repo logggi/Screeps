@@ -28,7 +28,7 @@ var roleSpawnCreeps = {
         
         let tEnergy = Game.spawns['Spawn1'].room.energyAvailable;
 
-        if(Game.spawns['Spawn1'].room.energyAvailable >= 900) {
+        if(Game.spawns['Spawn1'].room.energyAvailable >= 500) {
             if(tHarvesters < mHarvesters)
             {
                 let sources = Game.spawns['Spawn1'].room.sources().sort((a,b) => a.memory.workers - b.memory.workers);
@@ -41,7 +41,8 @@ var roleSpawnCreeps = {
                 if(_.isString(newCreep)) {
                     sources[0].memory.workers += 1;
                 }
-            } else if (tTransporters < mTransporters && tEnergy >= 1300)
+            }
+            if (tTransporters < mTransporters && tEnergy >= 1200)
             {
                 let sources = Game.spawns['Spawn1'].room.sources().sort((a,b) => a.memory.workers - b.memory.workers);
                 let container = sources[0].pos.findInRange(FIND_STRUCTURES, 2, {filter: obj => obj.structureType == STRUCTURE_CONTAINER})[0];
