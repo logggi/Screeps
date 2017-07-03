@@ -28,28 +28,32 @@ var roleSpawnCreeps = {
         
         let tEnergy = Game.spawns['Spawn1'].room.energyAvailable;
 
-        if(Game.spawns['Spawn1'].room.energyAvailable >= 500) {
-            if(tHarvesters < mHarvesters)
+        if(tEnergy >= 100) {
+            if(tHarvesters < mHarvesters && tEnergy >= 1300)
             {
                 let sources = Game.spawns['Spawn1'].room.sources().sort((a,b) => a.memory.workers - b.memory.workers);
                 let container = sources[0].pos.findInRange(FIND_STRUCTURES, 2, {filter: obj => obj.structureType == STRUCTURE_CONTAINER})[0];
+                if(!container) {
+                    container = 'no_container';
+                }
                 const newCreep = Game.spawns['Spawn1'].createCreep(
                                         [WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE,CARRY], //1300
                                         undefined,
-                                        { role: 'harvesters', source: sources[0].id, container: container.id, working: false }
+                                        { role: 'harvesters', source: sources[0].id, container: container, working: false }
                                     );
                 if(_.isString(newCreep)) {
                     sources[0].memory.workers += 1;
                 }
             }
-            if (tTransporters < mTransporters && tEnergy >= 1200)
+            if (tTransporters < mTransporters && tEnergy >= 100)
             {
                 let sources = Game.spawns['Spawn1'].room.sources().sort((a,b) => a.memory.workers - b.memory.workers);
                 let container = sources[0].pos.findInRange(FIND_STRUCTURES, 2, {filter: obj => obj.structureType == STRUCTURE_CONTAINER})[0];
                 Game.spawns['Spawn1'].createCreep(
-                        [WORK,WORK,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,CARRY], //1300
+                        //[WORK,WORK,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,CARRY], //1300
+                        [WORK,MOVE,MOVE,CARRY,CARRY],
                         undefined,
-                        { role: 'transporter', container: container.id, working: false }
+                        { role: 'transporter', container: container, working: false }
                     );
             }
             else if(tUpgraders < mUpgraders)
