@@ -14,11 +14,11 @@ var roleSpawnCreeps = {
         const mRepairers = 0;
         const mTransporters = 3;
     
-        let tHarvesters = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'harvester' }}}).length;
-        let tUpgraders = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'upgrader' }}}).length;
-        let tBuilders = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'builder' }}}).length;
-        let tRepairers = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'repairer' }}}).length;
-        let tTransporters = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS, { filter: obj => obj.memory.role == 'transporter'}).length;
+        let tHarvesters = _(Memory.creeps).filter({ role: 'harvester' }).size();
+        let tUpgraders = _(Memory.creeps).filter({ role: 'upgrader' }).size();
+        let tBuilders = _(Memory.creeps).filter({ role: 'builder' }).size();
+        let tRepairers = _(Memory.creeps).filter({ role: 'repairer' }).size();
+        let tTransporters = _(Memory.creeps).filter({ role: 'transporter'}).size();
 
         Game.spawns['Spawn1'].room.visual.text("Harvesters:" + tHarvesters + "/" + mHarvesters, 16, 11, {color: 'green', align: 'left'});
         Game.spawns['Spawn1'].room.visual.text("Upraders: " + tUpgraders + "/" + mUpgraders, 16, 13, {color: 'green', align: 'left'})
@@ -33,16 +33,14 @@ var roleSpawnCreeps = {
             {
                 let sources = Game.spawns['Spawn1'].room.sources().sort((a,b) => a.memory.workers - b.memory.workers);
                 let container = sources[0].pos.findInRange(FIND_STRUCTURES, 2, {filter: obj => obj.structureType == STRUCTURE_CONTAINER})[0];
-                if(!container) {
-                    container = 'no_container';
-                }
+
                 const newCreep = Game.spawns['Spawn1'].createCreep(
                                         [WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE,CARRY], //1300
                                         undefined,
-                                        { role: 'harvester', source: sources[0].id, container: container, working: false }
+                                        { role: 'harvester', source: sources[0].id, container: container.id, working: false }
                                     );
                 if(_.isString(newCreep)) {
-                    sources[0].memory.workers += 1;
+                    sources[0].memory.workers++;
                 }
             }
             if (tTransporters < mTransporters && tEnergy >= 300)

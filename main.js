@@ -23,7 +23,7 @@ module.exports.loop = function() {
     } else {
         for(let i in Memory.rooms['E97N74'].constructionSites) {
             if(Game.constructionSites[i] == undefined) {
-                Game.spawns['Spawn1'].room.spawnStructures();
+                Game.rooms['E97N74'].spawnStructures();
                 Memory.rooms['E97N74'].spawnStructuresUpdate = true;
                 updateConstructionSites = true;
             }

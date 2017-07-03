@@ -1,4 +1,5 @@
 module.exports = {
+    
     init: function() {
     
         //Give sources memory
@@ -7,6 +8,7 @@ module.exports = {
            get: function() {
                if(_.isUndefined(Memory.mySourcesMemory)) {
                    Memory.mySourcesMemory = {};
+                   Memory.mySourcesMemory[this.id] = {workers: 0};
                }
                if(!_.isObject(Memory.mySourcesMemory)) {
                    return undefined;
@@ -16,6 +18,7 @@ module.exports = {
            set: function(value) {
                if(_.isUndefined(Memory.mySourcesMemory)) {
                    Memory.mySourcesMemory = {};
+                   Memory.mySourcesMemory[this.id] = {workers: 0};
                }
                if(!_.isObject(Memory.mySourcesMemory)) {
                    throw new Error('Could not set souce memory');
