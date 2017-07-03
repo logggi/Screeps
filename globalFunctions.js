@@ -62,6 +62,7 @@ module.exports = {
             if(!this._spawnStructures) {
                 if(!this.memory.spawnStructures || this.memory.spawnStructuresUpdate) {
                     this.memory.spawnStructures = this.find(FIND_STRUCTURES, {filter: obj => obj.structureType == STRUCTURE_SPAWN || obj.structureType == STRUCTURE_EXTENSION}).map(structs => structs.id);
+                    this.memory.spawnStructuresUpdate = false;
                 }
                 this._spawnStructures = this.memory.spawnStructures.map(id => Game.getObjectById(id));
             }
