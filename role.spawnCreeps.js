@@ -8,11 +8,11 @@
  */
 var roleSpawnCreeps = {
     run: function() {
-        const mHarvesters = 0;
+        const mHarvesters = 2;
         const mUpgraders = 3;
         const mBuilders = 3;
         const mRepairers = 0;
-        const mTransporters = 3;
+        const mTransporters = 2;
     
         let harvestersTTL = _(Memory.creeps).filter({ role: 'harvester' });
         let upgradersTTL = _(Memory.creeps).filter({ role: 'upgrader' });
@@ -36,13 +36,14 @@ var roleSpawnCreeps = {
         let tEnergy = Game.spawns['Spawn1'].room.energyAvailable;
         
         if(tEnergy >= 100) {
-            if(tHarvesters < mHarvesters && tEnergy >= 1300)
+            if(tHarvesters < mHarvesters && tEnergy >= 550)
             {
                 let sources = Game.spawns['Spawn1'].room.sources().sort((a,b) => a.memory.workers - b.memory.workers);
                 let container = sources[0].pos.findInRange(FIND_STRUCTURES, 2, {filter: obj => obj.structureType == STRUCTURE_CONTAINER})[0];
 
                 const newCreep = Game.spawns['Spawn1'].createCreep(
-                                        [WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE,CARRY], //1300
+                                        //[WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE,CARRY], //1300
+                                        [WORK,WORK,WORK,WORK,MOVE,MOVE,CARRY], //550
                                         undefined,
                                         { role: 'harvester', source: sources[0].id, container: container.id, working: false }
                                     );
@@ -52,13 +53,14 @@ var roleSpawnCreeps = {
             }
             if((tTransporters < mTransporters) && tEnergy >= 300)
             {
-                let sources = Game.spawns['Spawn1'].room.sources().sort((a,b) => a.memory.workers - b.memory.workers);
+                let sources = Game.spawns['Spawn1'].room.sources();
                 let container = sources[0].pos.findInRange(FIND_STRUCTURES, 2, {filter: obj => obj.structureType == STRUCTURE_CONTAINER})[0];
                 Game.spawns['Spawn1'].createCreep(
                         //[WORK,WORK,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,CARRY], //1300
-                        [WORK,MOVE,MOVE,CARRY,CARRY],
+                        //[WORK,WORK,MOVE,MOVE,MOVE,CARRY,CARRY], //300
+                        [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,MOVE], //550
                         undefined,
-                        { role: 'transporter', container: container, working: false }
+                        { role: 'transporter', container: container.id, working: false }
                     );
                 
             }
@@ -66,7 +68,7 @@ var roleSpawnCreeps = {
             {
                 Game.spawns['Spawn1'].createCreep(
                         //[WORK,WORK,WORK,WORK,WORK,MOVE,CARRY,CARRY,CARRY],
-                        [WORK,MOVE,MOVE,CARRY,CARRY],
+                        [WORK,WORK,MOVE,MOVE,CARRY,CARRY,CARRY],
                         undefined,
                         { role: 'upgrader', working: false }
                     );
@@ -75,7 +77,7 @@ var roleSpawnCreeps = {
             {
                 Game.spawns['Spawn1'].createCreep(
                     //[WORK,WORK,WORK,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], //1300
-                    [WORK,WORK,MOVE,CARRY],
+                    [WORK,WORK,WORK,MOVE,CARRY,CARRY],
                     undefined,
                     { role: 'builder', working: false }
                 );

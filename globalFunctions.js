@@ -30,7 +30,7 @@ module.exports = {
         //Get all containers
         Room.prototype.containers = function() {
             if(!this._containers) {
-                if(!this.memory.containerIds) {
+                if(!this.memory.containerIds || this.memory.spawnStructuresUpdate) {
                     this.memory.containerIds = this.find(FIND_STRUCTURES, {filter: obj => obj.structureType == STRUCTURE_CONTAINER}).map(obj => obj.id)
                 }
                 this._containers = this.memory.containerIds.map(id => Game.getObjectById(id));

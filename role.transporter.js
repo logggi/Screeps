@@ -13,8 +13,7 @@ module.exports = function(name) {
     let containers = creep.room.containers();
     
     let target = creep.pos.findClosestByRange(creep.room.spawnStructures(), {filter: obj => obj.energy != obj.energyCapacity})
-    let container = undefined; //target.pos.findClosestByRange(containers, {filter: obj => obj.store[RESOURCE_ENERGY] > 0});
-    //let container = Game.getObjectById('5958b3408df84f4018fd5af1')
+    let container = Game.getObjectById(creep.memory.container);
     
     if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
         creep.memory.working = true;
@@ -30,7 +29,7 @@ module.exports = function(name) {
         if (!container) {
             let source = creep.pos.findClosestByRange(creep.room.sources());
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                pathing.run(creep, source, 10)
+                pathing.run(creep, source, 20)
             }
         }
     }
@@ -38,12 +37,15 @@ module.exports = function(name) {
     {
         if(target) {
             if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                pathing.run(creep, target, 20);
+                pathing.run(creep, target, 10);
             }
-        } else {
-            target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
-            if(creep.build(target) == ERR_NOT_IN_RANGE) {
-                pathing.run(creep, target, 5)
+        } else
+        {
+            target = new RoomPosition(9,18,'E97N74');
+            if( creep.pos == target) {
+                creep.drop(RESOURCE_ENERGY)
+            } else {
+                pathing.run(creep, mov, 5, false)
             }
         }
     }
