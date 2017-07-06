@@ -10,6 +10,10 @@ var roleCleanup = {
     run: function() {
 		for(var name in Memory.creeps) {
 			if(!Game.creeps[name]) {
+			    if(_.isString(Memory.creeps[name].source)) {
+                    let source = Game.getObjectById(Memory.creeps[name].source);
+                    source.memory.workers--;
+			    }
 				delete Memory.creeps[name];
 				console.log("creep deleted from memory: " + name)
 			}

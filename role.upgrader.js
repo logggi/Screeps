@@ -15,7 +15,7 @@ var roleUpgrader = {
         var creep = Game.creeps[nam];
         var spawn1 = Game.spawns['Spawn1'];
         var control = spawn1.room.controller;
-        var resource = Game.getObjectById('58dbc35f8283ff5308a3d721')
+        var resource = control.pos.findClosestByRange(control.room.containers());
         
         if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
                 creep.memory.working = true;
@@ -25,7 +25,7 @@ var roleUpgrader = {
         }
         
         if(!creep.memory.working) {
-            if(creep.harvest(resource) == ERR_NOT_IN_RANGE) {
+            if(creep.withdraw(resource, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 pathing.run(creep, resource, 5);
             }
         } else {
