@@ -9,8 +9,8 @@
 var roleSpawnCreeps = {
     run: function() {
         const mHarvesters = 2;
-        const mUpgraders = 3;
-        const mBuilders = 3;
+        const mUpgraders = 4;
+        const mBuilders = 2;
         const mRepairers = 0;
         const mTransporters = 2;
     
@@ -49,6 +49,9 @@ var roleSpawnCreeps = {
                 } else {
                     part = parts[550];
                 }
+                if(container == undefined) {
+                    container = {id: "null"};
+                }
                 if(tHarvesters == 1) {
                     const newCreep = Game.spawns['Spawn1'].createCreep(
                                         //[WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE,CARRY], //1300
@@ -71,10 +74,13 @@ var roleSpawnCreeps = {
             {
                 let sources = Game.spawns['Spawn1'].room.sources();
                 let container = sources[0].pos.findInRange(FIND_STRUCTURES, 2, {filter: obj => obj.structureType == STRUCTURE_CONTAINER})[0];
+                if(container == undefined) {
+                    container = {id: "null"};
+                }
                 Game.spawns['Spawn1'].createCreep(
                         //[WORK,WORK,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,CARRY], //1300
-                        //[WORK,WORK,MOVE,MOVE,MOVE,CARRY,CARRY], //300
-                        [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,MOVE], //550
+                        [MOVE,MOVE,CARRY,CARRY,CARRY,CARRY], //300
+                        //[CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,MOVE], //550
                         undefined,
                         { role: 'transporter', container: container.id, working: false }
                     );
