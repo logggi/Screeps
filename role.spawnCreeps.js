@@ -9,7 +9,7 @@
 var roleSpawnCreeps = {
     run: function() {
         const mHarvesters = 2;
-        const mUpgraders = 4;
+        const mUpgraders = 6;
         const mBuilders = 2;
         const mRepairers = 0;
         const mTransporters = 2;
@@ -44,7 +44,7 @@ var roleSpawnCreeps = {
                 let part;
                 parts[0] = [WORK,WORK,MOVE,CARRY];
                 parts[550] = [WORK,WORK,WORK,WORK,MOVE,MOVE,CARRY];
-                if(tHarvesters == 0) {
+                if(tHarvesters <= 1) {
                     part = parts[0];
                 } else {
                     part = parts[550];
@@ -79,7 +79,7 @@ var roleSpawnCreeps = {
                 }
                 Game.spawns['Spawn1'].createCreep(
                         //[WORK,WORK,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,CARRY], //1300
-                        [WORK,MOVE,MOVE,CARRY,CARRY], //300
+                        [MOVE,MOVE,CARRY,CARRY,CARRY,CARRY  ], //300
                         //[CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,MOVE], //550
                         undefined,
                         { role: 'transporter', container: container.id, working: false }
