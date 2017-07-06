@@ -8,7 +8,6 @@ var roleRepair = {
         var creep = Game.creeps[nam];
         var spawn1 = Game.spawns['Spawn1'];
         var source = creep.pos.findClosestByRange(FIND_SOURCES);
-        var container = creep.pos.findClosestByRange(creep.room.containers());
         
         if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
                 creep.memory.working = true;
@@ -19,19 +18,13 @@ var roleRepair = {
         }
         
         if(!creep.memory.working) {
-            if(creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                pathing.run(creep, container, 20)
-            } 
+            if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                    pathing.run(creep, source, 5);
+            }    
         } else {
 			target = creep.room.towers()[0];
-            if(target.energy == target.energyCapacity) {
-                if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                    pathing.run(creep, creep.room.controller, 5)
-                }
-            } else {
-                if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    pathing.run(creep, target, 5);
-                }
+            if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                pathing.run(creep, target, 5);
             }
         }
     }
