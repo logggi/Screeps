@@ -27,26 +27,16 @@ module.exports = function(name) {
             pathing.run(creep, container, 20)
         }
         if (!container) {
-            let source = creep.pos.findClosestByRange(creep.room.sources());
-            if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+            let source = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+            if(creep.pickup(source) == ERR_NOT_IN_RANGE) {
                 pathing.run(creep, source, 20)
             }
         }
     }
     else
     {
-        if(target) {
-            if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                pathing.run(creep, target, 10);
-            }
-        } else
-        {
-            target = new RoomPosition(9,18,'E97N74');
-            if( creep.pos == target) {
-                creep.drop(RESOURCE_ENERGY)
-            } else {
-                pathing.run(creep, mov, 5, false)
-            }
+        if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            pathing.run(creep, target, 10);
         }
     }
 };

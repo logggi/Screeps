@@ -79,7 +79,7 @@ var roleSpawnCreeps = {
                 }
                 Game.spawns['Spawn1'].createCreep(
                         //[WORK,WORK,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,MOVE,CARRY], //1300
-                        [MOVE,MOVE,CARRY,CARRY,CARRY,CARRY], //300
+                        [WORK,MOVE,MOVE,CARRY,CARRY], //300
                         //[CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,CARRY,CARRY,MOVE], //550
                         undefined,
                         { role: 'transporter', container: container.id, working: false }
