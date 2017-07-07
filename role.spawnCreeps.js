@@ -9,7 +9,7 @@
 var roleSpawnCreeps = {
     run: function() {
         const mHarvesters = 2;
-        const mUpgraders = 4;
+        const mUpgraders = 6;
         const mBuilders = 2;
         const mRepairers = 0;
         const mTransporters = 2;
