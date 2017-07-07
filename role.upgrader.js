@@ -10,22 +10,26 @@
 var pathing = require('pathing');
  
 var roleUpgrader = {
-    run: function(nam) {
+    run: function(name) {
 
-        var creep = Game.creeps[nam];
-        var spawn1 = Game.spawns['Spawn1'];
-        var control = spawn1.room.controller;
-        var resource = control.pos.findClosestByRange(control.room.containers());
-        
+        var creep = Game.creeps[name];
+        let control = Game.spawns['Spawn1'].room.controller;
+
         if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
-                creep.memory.working = true;
+            creep.memory.working = true;
         }
         if(creep.memory.working && creep.carry.energy == 0) {
             creep.memory.working = false;
         }
         
         if(!creep.memory.working) {
-            if(creep.withdraw(resource, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            let resource = control.pos.findClosestByRange(control.room.containers());
+            if(resource == undefined) {
+                resource = control.pos.findClosestByRange(control.room.sources());
+                if(creep.harvest(resource, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    pathing.run(creep, resource)
+                }
+            } else if(creep.withdraw(resource, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 pathing.run(creep, resource, 5);
             }
         } else {

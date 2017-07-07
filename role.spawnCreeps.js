@@ -34,7 +34,7 @@ var roleSpawnCreeps = {
         Game.spawns['Spawn1'].room.visual.text("Transporters: " + tTransporters + "/" + mTransporters, 16, 10, {color: 'green', align: 'left'})
 
         let tEnergy = Game.spawns['Spawn1'].room.energyAvailable;
-        
+
         if(tEnergy >= 100) {
             if(tHarvesters < mHarvesters || tHarvesters == 0)
             {
@@ -52,24 +52,26 @@ var roleSpawnCreeps = {
                 if(container == undefined) {
                     container = {id: "null"};
                 }
-                if(tHarvesters == 1) {
-                    const newCreep = Game.spawns['Spawn1'].createCreep(
+                if(tHarvesters == 0) {
+                    let newCreep = Game.spawns['Spawn1'].createCreep(
                                         //[WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE,CARRY], //1300
                                         part, //550
                                         undefined,
                                         { role: 'harvester', source: sources[0].id, container: container.id, working: false }
                                     );
-                } 
-                const newCreep = Game.spawns['Spawn1'].createCreep(
+                } else {
+                    let newCreep = Game.spawns['Spawn1'].createCreep(
                                         //[WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE,CARRY], //1300
                                         [WORK,WORK,WORK,WORK,MOVE,MOVE,CARRY], //550
                                         undefined,
                                         { role: 'harvester', source: sources[0].id, container: container.id, working: false }
                                     );
+                }
                 if(_.isString(newCreep)) {
                     sources[0].memory.workers++;
                 }
             }
+
             if((tTransporters < mTransporters) && tEnergy >= 300)
             {
                 let sources = Game.spawns['Spawn1'].room.sources();
@@ -113,6 +115,7 @@ var roleSpawnCreeps = {
                 );
             }
         }
+
     }
 }
 
