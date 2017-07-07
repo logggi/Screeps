@@ -13,6 +13,9 @@ module.exports = function(name) {
     let containers = creep.room.containers();
     
     let target = creep.pos.findClosestByRange(creep.room.spawnStructures(), {filter: obj => obj.energy != obj.energyCapacity})
+    if(target == undefined) {
+        target = creep.pos.findClosestByRange(creep.room.towers());
+    }
     let container = Game.getObjectById(creep.memory.container);
     
     if(!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
