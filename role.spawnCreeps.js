@@ -52,15 +52,16 @@ var roleSpawnCreeps = {
                 if(container == undefined) {
                     container = {id: "null"};
                 }
+let newCreep;
                 if(tHarvesters == 0) {
-                    let newCreep = Game.spawns['Spawn1'].createCreep(
+                    newCreep = Game.spawns['Spawn1'].createCreep(
                                         //[WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE,CARRY], //1300
                                         part, //550
                                         undefined,
                                         { role: 'harvester', source: sources[0].id, container: container.id, working: false }
                                     );
                 } else {
-                    let newCreep = Game.spawns['Spawn1'].createCreep(
+                    newCreep = Game.spawns['Spawn1'].createCreep(
                                         //[WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE,CARRY], //1300
                                         [WORK,WORK,WORK,WORK,MOVE,MOVE,CARRY], //550
                                         undefined,
