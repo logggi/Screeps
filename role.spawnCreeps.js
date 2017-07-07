@@ -52,9 +52,15 @@ var roleSpawnCreeps = {
                 if(container == undefined) {
                     container = {id: "null"};
                 }
+<<<<<<< HEAD
                 let newCreep;
                 if(tHarvesters == 0) {
                  newCreep = Game.spawns['Spawn1'].createCreep(
+=======
+let newCreep;
+                if(tHarvesters == 0) {
+                    newCreep = Game.spawns['Spawn1'].createCreep(
+>>>>>>> 5adfd17350e51fe56998e46da239a01178e238a0
                                         //[WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE,CARRY], //1300
                                         part, //550
                                         undefined,
